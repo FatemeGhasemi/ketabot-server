@@ -1,7 +1,7 @@
 
 const checkAdmin=(req,res,next)=> {
     let adminToken=req.headers["admin-token"];
-    if (process.env.ADMIN_TOKEN===adminToken){
+    if (adminToken!==undefined && process.env.ADMIN_CODE===adminToken){
         next()
     }
     else{
