@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
     "title": {type: String, index: true},
-    "bookName": {type: String, index: true},
+    "path":{required:true,unique:true,type:String},
     "cost": String,
     "description": {type: String, index: true},
     "publisher": String,
@@ -17,8 +17,9 @@ const bookSchema = new mongoose.Schema({
     "downloadCount": Number,
     "type": String,
     "cover": String,
-    "parts": Array,
-    "sourceLink": String
+    "parts": {required:true,type:Array},
+    "sourceLink": String,
+    "isActive":{type: Boolean,default:true}
 
 
 });
