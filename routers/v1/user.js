@@ -41,7 +41,7 @@ const userDownloadCountIncrement = async (req, res) => {
 
 
 router.post('/',createNewUser);
-router.put('/', userDownloadCountIncrement);
+router.put('/',checkAdminRole, userDownloadCountIncrement);
 router.get('/',checkAdminRole, getListOfUsers);
 module.exports = router;
 

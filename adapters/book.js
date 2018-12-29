@@ -22,6 +22,10 @@ const searchBookByDetails = (details, begin, total) => {
      return bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
 };
 
+const returnAllBooks = (begin, total) => {
+    return bookSchema.find({}).sort({"title": -1}).skip(begin).limit(total)
+};
+
 
 const findBookByTitle = (details, begin, total) => {
      return bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
@@ -62,5 +66,6 @@ module.exports = {
     createBook,
     findBookById,
     searchBookByDetails,
-    updateBookData
+    updateBookData,
+    returnAllBooks
 };
