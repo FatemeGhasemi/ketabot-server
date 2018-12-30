@@ -21,8 +21,9 @@ const bookSchema = new mongoose.Schema({
     "sourceLink": String,
     "isActive":{type: Boolean,default:true}
 
+{
 
-});
+
 bookSchema.index({title: 1});
 bookSchema.index({bookName: 1});
 bookSchema.index({
