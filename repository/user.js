@@ -1,4 +1,4 @@
-const userSchema = require('../db/models/user').userModel;
+const userSchema = require('../models/user').userModel;
 
 
 const updateDownloadCount = (telegramId) => {

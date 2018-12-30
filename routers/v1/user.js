@@ -1,6 +1,6 @@
 const express = require('express');
 app = express();
-const userAdapter = require("../../adapters/user");
+const userAdapter = require("../../repository/user");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const router = express.Router();

@@ -1,4 +1,4 @@
-const bookSchema = require('../db/models/book').bookModel;
+const bookSchema = require('../models/book').bookModel;
 
 
 const createBook = (bookData) => {

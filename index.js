@@ -5,7 +5,7 @@ const db = require("./db/mongoose-connection");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-db.initMongo();
+db.init();
 
 app.use('/api/v1/books', require('./routers/v1/book'));
 app.use('/api/v1/users', require('./routers/v1/user'));

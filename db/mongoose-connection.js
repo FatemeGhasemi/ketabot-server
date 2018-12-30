@@ -5,7 +5,7 @@ if (process.env.MONGO_USERNAME) {
 }else{
     mongoUrl+= process.env.MONGO_HOST+":"+process.env.MONGO_PORT+"/"+process.env.MONGO_DB_NAME;
 }
-const initMongo = () => {
+const init = () => {
     console.log("mongoUrl:",mongoUrl);
     mongoose.connect(mongoUrl,{useNewUrlParser:true});
     let db = mongoose.connection;
@@ -16,5 +16,5 @@ const initMongo = () => {
 };
 
 module.exports = {
-    initMongo
+     init
 }
