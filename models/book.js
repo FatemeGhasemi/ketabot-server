@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const bookSchema = new mongoose.Schema({
-    "title": {type: String, index: true},
+    "title": {type: String, index: true, required: true},
     "path": {required: true, unique: true, type: String},
     "cost": String,
     "description": {type: String, index: true},
@@ -20,8 +20,7 @@ const bookSchema = new mongoose.Schema({
     "parts": {required: true, type: Array},
     "sourceLink": String,
     "isActive": {type: Boolean, default: true}
-
-})
+});
 
 
 bookSchema.index({title: 1});

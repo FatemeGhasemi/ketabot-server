@@ -34,7 +34,7 @@ const searchBookByCategory = async (req, res) => {
         const totalNum = parseInt(req.query.total);
         const category = req.query.category;
         const result = await book.findBookByCategory(category, beginNum, totalNum);
-        res.json({"message": "your search result is: " + result})
+        res.json({"message": "your search result is: " ,books: result})
     } catch (e) {
         res.status(500).json({message: e.message})
     }
@@ -43,8 +43,8 @@ const searchBookByCategory = async (req, res) => {
 
 const searchBookById = async (req, res) => {
     try {
-        const result = await book.findBookById(req.query.id);
-        res.json({"message": "your search result is: " + result})
+        const result = await book.findBookById(req.query._id);
+        res.json({message: result})
     } catch (e) {
         res.status(500).json({message: e.message})
     }
@@ -66,7 +66,7 @@ const searchBookByDetails = async (req, res) => {
         let totalNum = parseInt(req.query.total);
         let details = req.query.details;
         const result = await book.searchBookByDetails(details, beginNum, totalNum);
-        res.json({"message": "your search result is: " + result})
+        res.json({"message": "your search result is: " ,books: result})
     } catch (e) {
         res.status(500).json({message: e.message})
     }
@@ -89,26 +89,26 @@ const returnAllBooks = async (req, res) => {
 const searchBookController = async (req, res) => {
     try {
         console.log(req.query)
-        if (req.query.id !== undefined) {
+        if (req.query._id !== undefined) {
             await searchBookById(req, res)
         }
         if (req.query.category !== undefined) {
             await searchBookByCategory(req, res)
         }
         if (req.query.details !== undefined) {
-            await searchBookByDetails(req, res);
+            const result=await searchBookByDetails(req, res);
+            console.log("category result:",result)
         }
 
         if ( req.query.title !== undefined) {
             await searchBookByTitle(req, res)
         }
-        if (req.query.this === undefined) {
-            await returnAllBooks(req, res)
-        }
+        // if (req.query.this === undefined) {
+        //     await returnAllBooks(req, res)
+        // }
 
     } catch (e) {
-        res.status(500).json({message: e.message});
-        throw e
+        res.json({'message': e.message});
     }
 };
 

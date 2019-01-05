@@ -1,9 +1,9 @@
 const bookSchema = require('../models/book').bookModel;
 
 
-const createBook = (bookData) => {
+const createBook = async (bookData) => {
     console.log("bookData:",bookData);
-    return bookSchema.findOneAndUpdate(
+    return await bookSchema.findOneAndUpdate(
         {
             "title": bookData.title
         },
@@ -13,31 +13,31 @@ const createBook = (bookData) => {
 };
 
 
-const findBookByCategory = (category, begin, total) => {
-    return bookSchema.find({"category": category}).sort({"title": -1}).skip(begin).limit(total)
+const findBookByCategory = async (category, begin, total) => {
+    return await bookSchema.find({"category": category}).sort({"title": -1}).skip(begin).limit(total)
 };
 
 
-const searchBookByDetails = (details, begin, total) => {
-     return bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
+const searchBookByDetails = async (details, begin, total) => {
+     return await bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
 };
 
-const returnAllBooks = (begin, total) => {
-    return bookSchema.find({}).sort({"title": -1}).skip(begin).limit(total)
-};
-
-
-const findBookByTitle = (details, begin, total) => {
-     return bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
+const returnAllBooks = async (begin, total) => {
+    return await bookSchema.find({}).sort({"title": -1}).skip(begin).limit(total)
 };
 
 
-const findBookById = (id) => {
-     return bookSchema.findOne({id: id})
+const findBookByTitle = async (details, begin, total) => {
+     return await bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
 };
 
-const updateBookData = (data) => {
-    return bookSchema.findOneAndUpdate(
+
+const findBookById = async (id) => {
+     return await bookSchema.findOne({_id: id})
+};
+
+const updateBookData = async (data) => {
+    return await bookSchema.findOneAndUpdate(
         {
             "title": data.title,
             "bookName": data.bookName,
