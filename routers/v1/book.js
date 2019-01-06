@@ -113,7 +113,7 @@ const searchBookController = async (req, res) => {
 };
 
 
-router.post('/', checkAdminRole, addNewBook);
+router.post('/',  addNewBook);
 router.put('/', checkAdminRole, updateBook);
 router.get('/', searchBookController);
 module.exports = router;

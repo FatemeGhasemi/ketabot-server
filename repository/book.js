@@ -2,14 +2,19 @@ const bookSchema = require('../models/book').bookModel;
 
 
 const createBook = async (bookData) => {
-    console.log("bookData:",bookData);
-    return await bookSchema.findOneAndUpdate(
-        {
-            "title": bookData.title
-        },
-        bookData,
-        {upsert: true}
-    )
+    try {
+
+        console.log("bookData:", bookData);
+        return await bookSchema.findOneAndUpdate(
+            {
+                "title": bookData.title
+            },
+            bookData,
+            {upsert: true}
+        )
+    }catch (e) {
+        console.log("createBook ERROR: ",e.message)
+    }
 };
 
 
