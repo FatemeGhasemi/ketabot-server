@@ -5,15 +5,17 @@ const createBook = async (bookData) => {
     try {
 
         console.log("bookData:", bookData);
-        return await bookSchema.findOneAndUpdate(
+        const result  = await bookSchema.findOneAndUpdate(
             {
                 "title": bookData.title
             },
             bookData,
             {upsert: true}
         )
+        console.log('result of create book ', result.title)
+        return result
     }catch (e) {
-        console.log("createBook ERROR: ",e.message)
+        console.log("createBook ERROR: ",e.message,bookData.title)
     }
 };
 

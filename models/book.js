@@ -24,7 +24,6 @@ const bookSchema = new mongoose.Schema({
 
 
 bookSchema.index({title: 1});
-bookSchema.index({bookName: 1});
 bookSchema.index({
     title: 'text', description: 'text', author: 'text',
     voiceActor: "text", tags: 'text', type: "text"
