@@ -87,12 +87,6 @@
             "schema": {
               "$ref": "#/definitions/BookResult"
             }
-          },
-          "400": {
-            "description": "Invalid username supplied"
-          },
-          "404": {
-            "description": "User not found"
           }
         }
       }
@@ -311,6 +305,6 @@
   },
   "basePath": "/api/v1/",
   "schemes": [
-    "http"
+   "http"
   ]
 }
