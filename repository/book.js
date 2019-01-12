@@ -5,7 +5,7 @@ const createBook = async (bookData) => {
     try {
 
         console.log("bookData:", bookData);
-        const result  = await bookSchema.findOneAndUpdate(
+        const result = await bookSchema.findOneAndUpdate(
             {
                 "title": bookData.title
             },
@@ -14,19 +14,26 @@ const createBook = async (bookData) => {
         )
         console.log('result of create book ', result.title)
         return result
-    }catch (e) {
-        console.log("createBook ERROR: ",e.message,bookData.title)
+    } catch (e) {
+        console.log("createBook ERROR: ", e.message, bookData.title)
     }
 };
 
 
 const findBookByCategory = async (category, begin, total) => {
-    return await bookSchema.find({"category": category}).sort({"title": -1}).skip(begin).limit(total)
+    try {
+        const result = await bookSchema.find({"category": category}).sort({"title": -1}).skip(begin).limit(total)
+        console.log('result of findBookByCategory: ', result.title);
+        return result
+    } catch (e) {
+        console.log("findBookByCategory ERROR: ", e.message)
+
+    }
 };
 
 
 const searchBookByDetails = async (details, begin, total) => {
-     return await bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
+    return await bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
 };
 
 const returnAllBooks = async (begin, total) => {
@@ -35,12 +42,12 @@ const returnAllBooks = async (begin, total) => {
 
 
 const findBookByTitle = async (details, begin, total) => {
-     return await bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
+    return await bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
 };
 
 
 const findBookById = async (id) => {
-     return await bookSchema.findOne({_id: id})
+    return await bookSchema.findOne({_id: id})
 };
 
 const updateBookData = async (data) => {

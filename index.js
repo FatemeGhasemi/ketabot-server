@@ -4,9 +4,12 @@ require('dotenv').config();
 const db = require("./db/mongoose-connection");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 
 db.init();
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1/books', require('./routers/v1/book'));
 app.use('/api/v1/users', require('./routers/v1/user'));
 app.listen(process.env.PORT, () => {

@@ -4,7 +4,7 @@ const book = require("../../repository/book");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const router = express.Router();
-const checkAdminRole = require("../../middlewares/check-roles").checkAdmin;
+const checkAdminRole = require("../../middlewares/check-roles");
 
 
 const addNewBook = async (req, res) => {
@@ -113,7 +113,7 @@ const searchBookController = async (req, res) => {
 };
 
 
-router.post('/', checkAdminRole,  addNewBook);
-router.put('/', checkAdminRole, updateBook);
+router.post('/', checkAdminRole.checkAdmin,  addNewBook);
+router.put('/', checkAdminRole.checkAdmin, updateBook);
 router.get('/', searchBookController);
 module.exports = router;

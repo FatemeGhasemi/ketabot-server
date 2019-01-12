@@ -4,7 +4,7 @@ const userAdapter = require("../../repository/user");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const router = express.Router();
-const checkAdminRole = require("../../middlewares/check-roles").checkAdmin;
+const checkAdminRole = require("../../middlewares/check-roles");
 
 
 const createNewUser = async (req, res) => {
@@ -40,8 +40,8 @@ const userDownloadCountIncrement = async (req, res) => {
 };
 
 
-router.post('/',checkAdminRole,createNewUser);
-router.put('/',checkAdminRole, userDownloadCountIncrement);
-router.get('/',checkAdminRole, getListOfUsers);
+router.post('/',checkAdminRole.checkAdmin,createNewUser);
+router.put('/',checkAdminRole.checkAdmin, userDownloadCountIncrement);
+router.get('/',checkAdminRole.checkAdmin, getListOfUsers);
 module.exports = router;
 

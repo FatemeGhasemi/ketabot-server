@@ -1,0 +1,297 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample Petstore server.  You can find \nout more about Swagger at \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
+    "version": "1.0.5",
+    "title": "ketabot"
+  },
+  "tags": [
+    {
+      "name": "users",
+      "description": "Operations about user"
+    },
+    {
+      "name": "books",
+      "description": "Operations about books"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "post": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Create book",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created book object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          {
+            "in": "admin-token",
+            "name": "header",
+            "required": true,
+            "schema": {
+              "default": "admin-token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Get book list",
+        "operationId": "getUserList",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+
+          {
+            "in": "query",
+            "name": "details",
+            "required": false,
+            "schema": {
+              "default": "details"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "in": "admin-token",
+            "name": "header",
+            "required": true,
+            "schema": {
+              "default": "admin-token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get users list",
+        "operationId": "getUserList",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "admin-token",
+            "name": "header",
+            "required": true,
+            "schema": {
+              "default": "admin-token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "telegramId": {
+          "type": "string"
+        },
+        "telegramUserName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "downloadCount": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Book": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "cost": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "publishedYear": {
+          "type": "number"
+        },
+        "translator": {
+          "type": "string"
+        },
+        "voiceActor": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "language": {
+          "type": "string"
+        },
+        "downloadCount": {
+          "type": "number",
+          "default": 0
+        },
+        "type": {
+          "type": "string"
+        },
+        "cover": {
+          "type": "string"
+        },
+        "parts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object"
+          }
+        },
+        "sourceLink": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "xml": {
+        "name": "Tag"
+      }
+    }
+  },
+  "basePath": "/FatemeGhasemi/ketabot/1.0.0",
+  "schemes": [
+    "http"
+  ]
+}
