@@ -13,6 +13,8 @@
      `MONGO_USERNAME=username`
      `MONGO_PASSWORD=password`
      `NODE_PATH=.`
+     `NODE_ENVIRONMENT=development`
+
  
      
      
