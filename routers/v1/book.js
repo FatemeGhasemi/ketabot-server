@@ -30,8 +30,8 @@ const updateBook = async (req, res) => {
 
 const searchBookByCategory = async (req, res) => {
     try {
-        const beginNum = parseInt(req.query.begin);
-        const totalNum = parseInt(req.query.total);
+        const beginNum = parseInt(req.query.begin)||0;
+        const totalNum = parseInt(req.query.total)||10;
         const category = req.query.category;
         const result = await book.findBookByCategory(category, beginNum, totalNum);
         res.json({"message": "your search result is: " ,books: result})
@@ -62,8 +62,8 @@ const searchBookByTitle = async (req, res) => {
 
 const searchBookByDetails = async (req, res) => {
     try {
-        let beginNum = parseInt(req.query.begin);
-        let totalNum = parseInt(req.query.total);
+        let beginNum = parseInt(req.query.begin)||0;
+        let totalNum = parseInt(req.query.total)||10;
         let details = req.query.details;
         const result = await book.searchBookByDetails(details, beginNum, totalNum);
         res.json({"message": "your search result is: " ,books: result})
@@ -75,8 +75,8 @@ const searchBookByDetails = async (req, res) => {
 
 const returnAllBooks = async (req, res) => {
     try {
-        let beginNum = parseInt(req.query.begin);
-        let totalNum = parseInt(req.query.total);
+        let beginNum = parseInt(req.query.begin)||0;
+        let totalNum = parseInt(req.query.total)||10;
         const result = await book.returnAllBooks(beginNum, totalNum);
         res.json({"message": "your search result is: " + result})
     } catch (e) {

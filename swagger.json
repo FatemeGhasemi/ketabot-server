@@ -74,6 +74,22 @@
           },
           {
             "in": "query",
+            "name": "begin",
+            "required": false,
+            "schema": {
+              "default": 0
+            }
+          },
+          {
+            "in": "query",
+            "name": "total",
+            "required": false,
+            "schema": {
+              "default": 10
+            }
+          },
+          {
+            "in": "query",
             "name": "category",
             "required": false,
             "schema": {
@@ -188,11 +204,7 @@
     "petstore_auth": {
       "type": "oauth2",
       "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-      "flow": "implicit",
-      "scopes": {
-        "write:pets": "modify pets in your account",
-        "read:pets": "read your pets"
-      }
+      "flow": "implicit"
     }
   },
   "definitions": {
