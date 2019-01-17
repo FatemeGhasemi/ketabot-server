@@ -27,7 +27,6 @@ const findBookByCategory = async (category, begin, total) => {
         return result
     } catch (e) {
         console.log("findBookByCategory ERROR: ", e.message)
-
     }
 };
 
@@ -35,6 +34,7 @@ const findBookByCategory = async (category, begin, total) => {
 const searchBookByDetails = async (details, begin, total) => {
     return await bookSchema.find({$text: {$search: details}}).sort({"title": -1}).skip(begin).limit(total)
 };
+
 
 const returnAllBooks = async (begin, total) => {
     return await bookSchema.find({}).sort({"title": -1}).skip(begin).limit(total)

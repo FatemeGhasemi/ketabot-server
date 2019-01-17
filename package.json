@@ -17,6 +17,7 @@
     "express": "^4.15.4",
     "fs": "0.0.1-security",
     "hashmap": "^2.3.0",
+    "jsonwebtoken": "^8.4.0",
     "mocha": "6.0.0-1",
     "mongoosastic": "^4.3.0",
     "mongoose": "^5.4.1",
