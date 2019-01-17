@@ -23,9 +23,16 @@ const getDownloadCount = (telegramId) => {
 
 
 const createUser = (userData) => {
+    let jwtToken;
     if (userData.phoneNumber) {
-        jwt.jwtGenerator({password: userData.password, phoneNumber: userData.phoneNumber})
-    }
+        jwtToken = jwt.jwtGenerator({
+            password: userData.password,
+            phoneNumber: userData.phoneNumber,
+            userName: userData.username
+        })
+    } else jwtToken = jwt.jwtGenerator({userName: userData.username});
+    console.log(userData.username, ": ",)
+
     return userSchema.findOneAndUpdate(
         {
             "telegramId": userData.telegramId
@@ -36,12 +43,11 @@ const createUser = (userData) => {
 };
 
 
-const login = (jwtToken,{data})=>{
-     const info = jwt.verifyJwt(jwtToken)
-    if (info.password === data.password && info.phoneNumber ===data.password) {
+const login = (jwtToken, {data}) => {
+    const info = jwt.verifyJwt(jwtToken)
+    if (info.password === data.password && info.phoneNumber === data.password) {
         return true
-    }
-    else return false
+    } else return false
 };
 
 

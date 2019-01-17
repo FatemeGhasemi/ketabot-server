@@ -11,7 +11,7 @@ const createNewUser = async (req, res) => {
     try {
         console.log("request body", req.body);
         await userAdapter.createUser(req.body);
-        res.json({message: "user created"})
+        res.json({message: "user created" + "jwtToken= "+})
     } catch (e) {
         res.status(500).json({message: e.message})
     }
@@ -40,7 +40,8 @@ const userDownloadCountIncrement = async (req, res) => {
 };
 
 
-router.post('/',checkAdminRole.checkAdmin,createNewUser);
+router.post('/',createNewUser);
+// router.post('/',checkAdminRole.checkRolesAccess,createNewUser);
 router.put('/',checkAdminRole.checkAdmin, userDownloadCountIncrement);
 router.get('/',checkAdminRole.checkAdmin, getListOfUsers);
 module.exports = router;
