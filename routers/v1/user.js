@@ -28,7 +28,7 @@ const createNewUser = async (req, res) => {
         });
         console.log(userData.username, ": ", jwtToken);
 
-        res.json({message: "user created" + "jwtToken= " + jwtToken})
+        res.json({ message: 'success', tokenType: 'Bearer', accessToken: jwtToken })
     } catch (e) {
         res.status(500).json({message: e.message})
     }
