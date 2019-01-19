@@ -45,21 +45,7 @@ const getListOfUsers = async (req, res) => {
 };
 
 
-const userDownloadCountIncrement = async (req, res) => {
-    try {
-        console.log("req.body:", req.body);
-        let telegramId = req.body.telegramId;
-        await userAdapter.updateDownloadCount(telegramId);
-        res.json({message: "download count incremented"})
-    } catch (e) {
-        res.status(500).json({message: e.message})
-    }
-};
-
-
 router.post('/', createNewUser);
-// router.post('/',checkAdminRole.checkAdmin,createNewUser);
-router.put('/', checkAdminRole.checkAdmin, userDownloadCountIncrement);
 router.get('/', checkAdminRole.checkRolesAccess, getListOfUsers);
 module.exports = router;
 
