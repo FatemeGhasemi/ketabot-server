@@ -5,8 +5,8 @@ let userSchema = new mongoose.Schema({
     "firstName"         : String,
     "lastName"          : String,
     "downloadCount"     : {type: Number, default: 0},
-    "phoneNumber"       : String,
-    "password"          : String,
+    "phoneNumber"       :{type: String,require: false},
+    "password"          : {type: String,require: false}
     // "isAdmin"           :{type:Boolean,default: false}
 
 });

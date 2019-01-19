@@ -1,4 +1,4 @@
-const acl = require('../helper/casbin');
+const casbinHelper = require('../helper/casbin');
 
 const checkAdmin = (req, res, next) => {
     let adminToken = req.headers["admin-token"];
@@ -10,9 +10,11 @@ const checkAdmin = (req, res, next) => {
 };
 
 
-const checkRolesAccess = (req,res,next)=>{
-    let accessToken = req.headers["access-token"]
-    if(acl.checkRoleAccess(accessToken,req.object,req.act)){
+const checkRolesAccess = async (req,res,next)=>{
+    let accessToken = req.headers["access-token"];
+    const checkRoleAccess = await casbinHelper.checkRoleAccess(accessToken,req.query.object,req.query.act);
+    console.log("checkRoleAccess: ",checkRoleAccess);
+    if(checkRoleAccess){
         next()
     }else {
         res.status(403).json({"message": "unAuthorize"})

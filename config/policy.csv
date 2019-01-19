@@ -1,0 +1,17 @@
+p, faghaaa, user, get
+p, mohammad_ranjbar_z, user, get
+p, faghaaa, user, post
+p, mohammad_ranjbar_z, user, post
+p, faghaaa, user, delete
+p, mohammad_ranjbar_z, user, delete
+p, faghaaa, user, put
+p, mohammad_ranjbar_z, user, put
+
+p, faghaaa, book, get
+p, mohammad_ranjbar_z, book, get
+p, faghaaa, book, post
+p, mohammad_ranjbar_z, book, post
+p, faghaaa, book, delete
+p, mohammad_ranjbar_z, book, delete
+p, faghaaa, book, put
+p, mohammad_ranjbar_z, book, put

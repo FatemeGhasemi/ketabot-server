@@ -6,8 +6,9 @@ const checkRoleAccess = async (jwtToken, object, act) => {
         const enforcer = await casbin.newEnforcer('./config/model.conf', './config/policy.csv');
         let userName = jwt.verifyJwt(jwtToken).username;
         return enforcer.enforce(userName, object, act)
+
     } catch (e) {
-        console.log(e.message)
+        console.log("checkRoleAccess ERROR: ", e.message)
     }
 };
 
@@ -16,7 +17,7 @@ const getRoles = async (username) => {
         const enforcer = await casbin.newEnforcer('./config/model.conf', './config/policy.csv');
         return enforcer.getRoles(username)
     } catch (e) {
-        console.log(e.message)
+        console.log("getRoles ERROR: ", e.message)
     }
 
 }

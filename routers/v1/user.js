@@ -5,13 +5,30 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const router = express.Router();
 const checkAdminRole = require("../../middlewares/check-roles");
+const jwt = require('../../helper/jwt');
 
 
 const createNewUser = async (req, res) => {
     try {
         console.log("request body", req.body);
-        await userAdapter.createUser(req.body);
-        res.json({message: "user created" + "jwtToken= "+})
+        const userData = await userAdapter.createUser(req.body);
+        let jwtToken;
+        if (userData.phoneNumber) {
+            jwtToken = jwt.jwtGenerator({
+                payload: {
+                    password: userData.password,
+                    phoneNumber: userData.phoneNumber,
+                    userName: userData.username
+                }
+            })
+        } else jwtToken = jwt.jwtGenerator({
+            payload: {
+                username: userData.username
+            }
+        });
+        console.log(userData.username, ": ", jwtToken);
+
+        res.json({message: "user created" + "jwtToken= " + jwtToken})
     } catch (e) {
         res.status(500).json({message: e.message})
     }
@@ -40,9 +57,9 @@ const userDownloadCountIncrement = async (req, res) => {
 };
 
 
-router.post('/',createNewUser);
-// router.post('/',checkAdminRole.checkRolesAccess,createNewUser);
-router.put('/',checkAdminRole.checkAdmin, userDownloadCountIncrement);
-router.get('/',checkAdminRole.checkAdmin, getListOfUsers);
+router.post('/', createNewUser);
+// router.post('/',checkAdminRole.checkAdmin,createNewUser);
+router.put('/', checkAdminRole.checkAdmin, userDownloadCountIncrement);
+router.get('/', checkAdminRole.checkRolesAccess, getListOfUsers);
 module.exports = router;
 
