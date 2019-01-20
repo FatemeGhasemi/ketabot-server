@@ -9,7 +9,7 @@ const sendOtpMessage = async (phoneNumber, message) => {
 
 
 const isOtpValid = async (otp, phoneNumber) => {
-    return await redis.getFromRedis(phoneNumber)
+    return await redis.getFromRedis(phoneNumber);
 };
 
 
