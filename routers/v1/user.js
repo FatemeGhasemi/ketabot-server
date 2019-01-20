@@ -24,8 +24,8 @@ const getOtp = async (req, res) => {
 
 const createNewUser = async (req, res) => {
     try {
-        if(req.body.phoneNumber && req.body.otp){
-            if(await otpHelper.isOtpValid(req.body.otp, req.body.phoneNumber)){
+        if(req.body.phoneNumber && req.query.otp){
+            if(await otpHelper.isOtpValid(req.query.otp, req.body.phoneNumber)){
                 const userData = await userAdapter.createUser(req.body);
                 res.json({message: userData.username + ' registered successfully'})
             }
