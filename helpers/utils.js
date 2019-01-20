@@ -20,4 +20,9 @@ const isAppLoginOrBot =(userData)=>{
 
 };
 
-module.exports ={isAppLoginOrBot}
+
+const getRandomFourDigitNumber= ()=> {
+    return Math.floor(1000 + Math.random() * 9000);
+};
+
+module.exports ={isAppLoginOrBot,getRandomFourDigitNumber};

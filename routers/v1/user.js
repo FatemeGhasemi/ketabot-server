@@ -12,6 +12,7 @@ const utils = require('../../helpers/utils');
 const createNewUser = async (req, res) => {
     try {
         console.log("request body", req.body);
+
         const userData = await userAdapter.createUser(req.body);
         res.json({ message: userData.username +' registered successfully' })
     } catch (e) {
@@ -32,7 +33,6 @@ const loginUser = async (req,res)=>{
         res.status(500).json({message: e.message})
     }
 };
-
 
 
 const getListOfUsers = async (req, res) => {

@@ -15,23 +15,25 @@ const getRedisClient = () => {
 
 
 const getFromRedis = async (key) => {
-       return await getRedisClient().get(key)
+    return await getRedisClient().get(key)
 };
 
 
 const setInRedis = async (key, data, expirationSecond) => {
-        await getRedisClient().set(key, JSON.stringify(data), expirationSecond)
+    await getRedisClient().set(key, JSON.stringify(data), expirationSecond)
 };
 
 
-const removeFromRedis = async (key)=>{
-       await getRedisClient().del(key)
+const removeFromRedis = async (key) => {
+    await getRedisClient().del(key)
 };
 
-const closeRedisConnection= ()=> {
+const closeRedisConnection = () => {
     if (redisClient) {
         console.log('Close redis connection');
         redisClient.end(true);
         redisClient = null
     }
 };
+
+module.exports = {getFromRedis, setInRedis, removeFromRedis, closeRedisConnection};
