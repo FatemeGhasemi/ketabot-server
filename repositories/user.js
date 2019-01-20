@@ -1,5 +1,5 @@
 const userSchema = require('../models/user').userModel;
-const jwt = require('../helper/jwt');
+const jwt = require('../helpers/jwt');
 
 
 const updateDownloadCount = (telegramId) => {
@@ -33,11 +33,13 @@ const createUser = (userData) => {
 };
 
 
-const login = (jwtToken, {data}) => {
-    const info = jwt.verifyJwt(jwtToken)
-    if (info.password === data.password && info.phoneNumber === data.password) {
-        return true
-    } else return false
+const isUserRegistered = (data) => {
+    if (data.phoneNumber) {
+        return userSchema.findOne({"phoneNumber": data.phoneNumber, "password":data.password}, data)
+    }
+    else {
+        return userSchema.findOne({"username": data.username}, data)
+    }
 };
 
 
@@ -50,5 +52,6 @@ module.exports = {
     updateDownloadCount,
     createUser,
     listUsers,
+    isUserRegistered,
     getDownloadCount
 };

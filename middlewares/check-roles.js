@@ -1,5 +1,5 @@
-const casbinHelper = require('../helper/casbin');
-const jwtHelper = require('../helper/jwt');
+const casbinHelper = require('../helpers/casbin');
+const jwtHelper = require('../helpers/jwt');
 
 
 const checkAdmin = (req, res, next) => {
@@ -13,14 +13,11 @@ const checkAdmin = (req, res, next) => {
 
 
 const checkRolesAccess = async (req, res, next) => {
-    let authorizationHeader = req.header('Authorization');
-    console.log("authorizationHeader: ", authorizationHeader);
+    const authorizationHeader = req.header('Authorization');
     const token = jwtHelper.removeBearer(authorizationHeader);
-    console.log("token: ", token);
     const act = req.method.toLowerCase();
     const obj = req.baseUrl.split('/')[3];
     const checkRoleAccess = await casbinHelper.checkRoleAccess(token, obj, act);
-    console.log("checkRoleAccess: ", checkRoleAccess);
     if (checkRoleAccess) {
         next()
     } else {

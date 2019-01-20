@@ -1,0 +1,4 @@
+p, username, data_that_have_access, one of CRUD methods that user have access to do like: get
+p, username, data_that_have_access, one of CRUD methods that user have access to do like: post
+p, username, data_that_have_access, one of CRUD methods that user have access to do like: delete
+p, username, data_that_have_access, one of CRUD methods that user have access to do like: put
