@@ -1,11 +1,11 @@
 const express = require('express');
 app = express();
-const userAdapter = require("../../../repositories/user");
+const userAdapter = require("../../repositories/user");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const router = express.Router();
-const checkAdminRole = require("../../../middlewares/check-roles");
-const jwt = require('../../../helpers/jwt');
+const checkAdminRole = require("../../middlewares/check-roles");
+const jwt = require('../../helpers/jwt');
 
 
 const createNewUser = async (req, res) => {

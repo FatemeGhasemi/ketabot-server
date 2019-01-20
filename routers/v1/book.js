@@ -1,10 +1,10 @@
 const express = require('express');
 app = express();
-const book = require("../../../repositories/book");
+const book = require("../../repositories/book");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const router = express.Router();
-const checkAdminRole = require("../../../middlewares/check-roles");
+const checkAdminRole = require("../../middlewares/check-roles");
 
 
 const addNewBook = async (req, res) => {
