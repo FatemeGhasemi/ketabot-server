@@ -44,13 +44,13 @@ const createNewUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         console.log("request body", req.body);
-        let userData = await userAdapter.isUserRegistered(req.body)
+        let userData = await userAdapter.isUserRegistered(req.body);
         const jwtToken = utils.isAppLoginOrBot(userData);
         console.log(userData.username, ": ", jwtToken);
         res.json({message: 'success', tokenType: 'Bearer', accessToken: jwtToken})
 
     } catch (e) {
-        console.log("loginUser ERROR: ", e.message)
+        console.log("loginUser ERROR: ", e.message);
         res.status(500).json({message: e.message})
     }
 };
@@ -68,6 +68,7 @@ const getListOfUsers = async (req, res) => {
 
 router.post('/', createNewUser);
 router.get('/', loginUser);
+router.get('/', getOtp);
 router.get('/', checkAdminRole.checkRolesAccess, getListOfUsers);
 module.exports = router;
 

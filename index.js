@@ -24,6 +24,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1/books', require('./routers/v1/book'));
 app.use('/api/v1/users', require('./routers/v1/user'));
 app.use('/api/v1/login', require('./routers/v1/user'));
+app.use('/api/v1/get-otp', require('./routers/v1/user'));
 app.use(Sentry.Handlers.errorHandler());
 
 app.listen(process.env.PORT, () => {
