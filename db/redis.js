@@ -9,24 +9,8 @@ const getRedisClient = () => {
             name: process.env.REDIS_DB,
             password: process.env.REDIS_PASSWORD
         });
-        console.log("redis connected...")
     }
     return redisClient
-};
-
-
-const getFromRedis = async (key) => {
-    return await getRedisClient().get(key)
-};
-
-
-const setInRedis = async (key, data, expirationSecond) => {
-    await getRedisClient().set(key, JSON.stringify(data), expirationSecond)
-};
-
-
-const removeFromRedis = async (key) => {
-    await getRedisClient().del(key)
 };
 
 const closeRedisConnection = () => {
@@ -37,4 +21,45 @@ const closeRedisConnection = () => {
     }
 };
 
-module.exports = {getFromRedis, setInRedis, removeFromRedis, closeRedisConnection};
+
+const getFromRedis = (key) => {
+    return new Promise((resolve, reject) => {
+        getRedisClient().get(key, function (err, result) {
+            if (err) {
+                return reject(err)
+            }
+            console.log('----------Redis : ', JSON.parse(result))
+            resolve(JSON.parse(result))
+        })
+    })
+};
+
+
+const setInRedis = (key, data, expirationSecond) => {
+    return new Promise((resolve, reject) => {
+        getRedisClient().set(key, JSON.stringify(data), 'EX', expirationSecond, function (err, result) {
+            if (err) {
+                return reject(err)
+            }
+            resolve(result)
+        })
+    })
+};
+
+
+const removeFromRedis = (key) => {
+    return new Promise((resolve, reject) => {
+        getRedisClient().del(key, function (err, result) {
+            if (err) {
+                return reject(err)
+            }
+            resolve()
+        })
+    })
+}
+
+module.exports = {
+    removeFromRedis,
+    setInRedis,
+    getFromRedis,
+}

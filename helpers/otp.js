@@ -9,16 +9,16 @@ const sendOtpMessage = async (phoneNumber, message) => {
 
 
 const isOtpValid = async (otp, phoneNumber) => {
-    const isOtpValidResult = await redis.getFromRedis(phoneNumber);
-    console.log("isOtpValidResult: ",isOtpValidResult)
-    return  isOtpValidResult
+    const redisOtp = await redis.getFromRedis(phoneNumber);
+    if (redisOtp == otp){return true}
+    else return false
 };
 
 
 const generateOtp = async (payload, expireTimeSecond) => {
     const otp = utils.getRandomFourDigitNumber();
     const redisKey = payload.phoneNumber;
-    await redis.setInRedis(redisKey, payload, expireTimeSecond);
+    await redis.setInRedis(redisKey, otp, expireTimeSecond);
     return otp;
 };
 
@@ -26,7 +26,7 @@ const generateOtp = async (payload, expireTimeSecond) => {
 const sendOtpHandler = async (payload) => {
     if (payload.phoneNumber) {
         const otpCode = await generateOtp(payload, 15 * 60 * 60);
-        await sendOtpMessage(payload.phoneNumber,otpCode)
+        // await sendOtpMessage(payload.phoneNumber,otpCode)
         return otpCode
     } else {
         console.log("sendOtpHandler ERROR: dont have phoneNumber ");

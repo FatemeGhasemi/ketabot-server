@@ -8,11 +8,12 @@ const checkAdminRole = require("../../middlewares/check-roles");
 const jwtHelper = require('../../helpers/jwt');
 const utils = require('../../helpers/utils');
 const otpHelper = require('../../helpers/otp');
+const redis = require('../../db/redis');
 
 
 const getOtp = async (req, res) => {
     try {
-        console.log("request body", req.query);
+        console.log("req: ", req);
         const otpCode = await otpHelper.sendOtpHandler(req.query);
         res.status(200).json({message: otpCode})
     } catch (e) {
@@ -26,6 +27,7 @@ const createNewUser = async (req, res) => {
     try {
         if(req.body.phoneNumber && req.query.otp){
             if(await otpHelper.isOtpValid(req.query.otp, req.body.phoneNumber)){
+                redis.removeFromRedis(req.body.phoneNumber)
                 const userData = await userAdapter.createUser(req.body);
                 res.json({message: userData.username + ' registered successfully'})
             }
