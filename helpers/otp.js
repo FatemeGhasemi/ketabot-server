@@ -4,7 +4,7 @@ const utils = require('./utils');
 
 
 const sendOtpMessage = async (phoneNumber, message) => {
-    await sendSms.send(phoneNumber, message, process.env.KAVE_NEGAR_SENDER_PHONE)
+    await sendSms.send(phoneNumber, message)
 };
 
 
@@ -23,9 +23,11 @@ const generateOtp = async (payload, expireTimeSecond) => {
 
 const sendOtpHandler = async (payload) => {
     if (payload.phoneNumber) {
-        await generateOtp(payload, 15 * 60 * 60);
-        await sendOtpMessage(payload.phoneNumber)
+        const otpCode = await generateOtp(payload, 15 * 60 * 60);
+        await sendOtpMessage(payload.phoneNumber,otpCode)
+        return otpCode
     } else {
+        console.log("sendOtpHandler ERROR: dont have phoneNumber ");
         return false
     }
 };

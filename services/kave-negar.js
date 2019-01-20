@@ -7,10 +7,10 @@ const kaveNegarPromisifyApi= Promise.promisifyAll(kaveNegar.KavenegarApi({
 );
 const api = kaveNegarPromisifyApi;
 
-const send = async (receptor,message, sender)=> {
-    return api.sendAsync({
+const send = async (receptor,message)=> {
+    return await api.Send({
         message: message,
-        sender: sender,
+        sender: process.env.KAVE_NEGAR_SENDER_PHONE,
         receptor: receptor
     });
 };

@@ -9,6 +9,7 @@ const getRedisClient = () => {
             name: process.env.REDIS_DB,
             password: process.env.REDIS_PASSWORD
         });
+        console.log("redis connected...")
     }
     return redisClient
 };

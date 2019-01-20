@@ -12,8 +12,8 @@ const otpHelper = require('../../helpers/otp');
 
 const getOtp = async (req, res) => {
     try {
-        console.log("request body", req.body);
-        const otpCode = await otpHelper.sendOtpHandler(req.body);
+        console.log("request body", req.query);
+        const otpCode = await otpHelper.sendOtpHandler(req.query);
         res.status(200).json({message: otpCode})
     } catch (e) {
         console.log("getOtp ERROR: ", e.message);
@@ -65,10 +65,9 @@ const getListOfUsers = async (req, res) => {
     }
 };
 
-
+router.get('/', getOtp);
 router.post('/', createNewUser);
 router.get('/', loginUser);
-router.get('/', getOtp);
-router.get('/', checkAdminRole.checkRolesAccess, getListOfUsers);
+// router.get('/', checkAdminRole.checkRolesAccess, getListOfUsers);
 module.exports = router;
 
