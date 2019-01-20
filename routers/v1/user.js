@@ -13,9 +13,7 @@ const createNewUser = async (req, res) => {
     try {
         console.log("request body", req.body);
         const userData = await userAdapter.createUser(req.body);
-        const  jwtToken = utils.isAppLoginOrBot(userData);
-        console.log(userData.username, ": ", jwtToken);
-        res.json({ message: 'success', tokenType: 'Bearer', accessToken: jwtToken })
+        res.json({ message: userData.username +' registered successfully' })
     } catch (e) {
         res.status(500).json({message: e.message})
     }
@@ -25,29 +23,10 @@ const loginUser = async (req,res)=>{
     try{
         console.log("request body", req.body);
         let userData = await userAdapter.isUserRegistered(req.body)
-        if (userData){
-            let jwtToken;
-            if (userData.phoneNumber) {
-                jwtToken = jwt.jwtGenerator({
-                    payload: {
-                        password: userData.password,
-                        phoneNumber: userData.phoneNumber,
-                        userName: userData.username
-                    }
-                })
-            } else jwtToken = jwt.jwtGenerator({
-                payload: {
-                    username: userData.username
-                }
-            });
+        const jwtToken = utils.isAppLoginOrBot(userData);
             console.log(userData.username, ": ", jwtToken);
-
             res.json({ message: 'success', tokenType: 'Bearer', accessToken: jwtToken })
 
-        }
-        else {
-            res.status(403).json({message:"user not registered before"})
-        }
     }catch (e) {
         console.log("loginUser ERROR: ", e.message)
         res.status(500).json({message: e.message})
