@@ -6,28 +6,15 @@ app.use(bodyParser.json());
 const router = express.Router();
 const checkAdminRole = require("../../middlewares/check-roles");
 const jwt = require('../../helpers/jwt');
+const utils = require('../../helpers/utils');
 
 
 const createNewUser = async (req, res) => {
     try {
         console.log("request body", req.body);
         const userData = await userAdapter.createUser(req.body);
-        let jwtToken;
-        if (userData.phoneNumber) {
-            jwtToken = jwt.jwtGenerator({
-                payload: {
-                    password: userData.password,
-                    phoneNumber: userData.phoneNumber,
-                    userName: userData.username
-                }
-            })
-        } else jwtToken = jwt.jwtGenerator({
-            payload: {
-                username: userData.username
-            }
-        });
+        const  jwtToken = utils.isAppLoginOrBot(userData);
         console.log(userData.username, ": ", jwtToken);
-
         res.json({ message: 'success', tokenType: 'Bearer', accessToken: jwtToken })
     } catch (e) {
         res.status(500).json({message: e.message})
