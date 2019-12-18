@@ -4,6 +4,7 @@ if (process.env.MONGO_USERNAME) {
     mongoUrl+= process.env.MONGO_USERNAME+":"+ process.env.MONGO_PASSWORD+"@"+process.env.MONGO_HOST+":"+process.env.MONGO_PORT+"/"+process.env.MONGO_DB_NAME;
 }else{
     mongoUrl+= process.env.MONGO_HOST+":"+process.env.MONGO_PORT+"/"+process.env.MONGO_DB_NAME;
+    console.log('mongoUrl: ',mongoUrl)
 }
 const init = () => {
     console.log("mongoUrl:",mongoUrl);

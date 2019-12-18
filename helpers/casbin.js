@@ -19,7 +19,6 @@ const getRoles = async (username) => {
     } catch (e) {
         console.log("getRoles ERROR: ", e.message)
     }
-
 }
 
 module.exports = {checkRoleAccess, getRoles};
