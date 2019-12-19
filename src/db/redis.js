@@ -1,4 +1,4 @@
-const redis = require("redis");
+const redis = require("src/db/redis");
 let redisClient;
 
 const getRedisClient = () => {
