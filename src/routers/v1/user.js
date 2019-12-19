@@ -32,6 +32,6 @@ const getListOfUsers = async (req, res) => {
 };
 
 router.post('/', createNewUser);
-router.get('/', checkAdminRole.checkAdmin(), getListOfUsers);
+router.get('/', checkAdminRole.checkAdmin, getListOfUsers);
 module.exports = router;
 
