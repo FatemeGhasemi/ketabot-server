@@ -1,5 +1,4 @@
 const userSchema = require('../models/user').userModel;
-const jwt = require('../helpers/jwt');
 
 
 const updateDownloadCount = (telegramId) => {
@@ -52,6 +51,5 @@ module.exports = {
     updateDownloadCount,
     createUser,
     listUsers,
-    isUserRegistered,
     getDownloadCount
 };
