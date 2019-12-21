@@ -7,28 +7,24 @@ const router = express.Router();
 const checkAdminRole = require('../../middlewares/check-roles')
 
 
-
-
 const createNewUser = async (req, res) => {
-    try {
-            const userData = await userAdapter.createUser(req.body);
-            res.json({message: userData.username + ' registered successfully'})
-    } catch (e) {
-        res.status(500).json({message: e.message})
-    }
+  try {
+    console.log("create new user: ", req.body)
+    const userData = await userAdapter.createUser(req.body);
+    res.json({message: userData.username + ' registered successfully'})
+  } catch (e) {
+    res.status(500).json({message: e.message})
+  }
 };
 
 
-
-
-
 const getListOfUsers = async (req, res) => {
-    try {
-        const result = await userAdapter.listUsers();
-        res.json({message: result})
-    } catch (e) {
-        res.status(500).json({message: e.message})
-    }
+  try {
+    const result = await userAdapter.listUsers();
+    res.json({message: result})
+  } catch (e) {
+    res.status(500).json({message: e.message})
+  }
 };
 
 router.post('/', createNewUser);
