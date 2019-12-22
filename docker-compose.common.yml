@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+  redisketabot:
+    image: bitnami/redis:latest
+    container_name: redisketabot
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    restart: always
+#    volumes:
+#      - redis:/bitnami/redis/data
+    networks:
+      - ketabot
+    ports:
+      - 6380:6379
+
+  mongodbketabot:
+    container_name: mongodbketabot
+    image: dubc/mongodb-3.4
+#    volumes:
+#      - mongodb-v3.4:/data/db
+    environment:
+      - AUTH=no
+    networks:
+      - ketabot
+    ports:
+      - 27019:27017
+
+
+networks:
+  ketabot:
+    external: true
+#
+#volumes:
+#  mongodb-v3.4:
+#  redis:

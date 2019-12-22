@@ -29,6 +29,6 @@ bookSchema.index({
     voiceActor: "text", tags: 'text', type: "text"
 });
 
-module.exports = {bookModel: mongoose.model('book', bookSchema, 'book')};
+module.exports = {bookModel: mongoose.model('books', bookSchema, 'books')};
 
 

@@ -33,8 +33,11 @@ const searchBookByCategory = async (req, res) => {
         const beginNum = parseInt(req.query.begin)||0;
         const totalNum = parseInt(req.query.total)||10;
         const category = req.query.category;
+        console.log(">>>>>hi to get book by category route>>>","category: ",req.query.category)
         const result = await book.findBookByCategory(category, beginNum, totalNum);
-        res.json({"message": "your search result is: " ,books: result})
+      console.log(">>>>> get book by category route RESULT>>>",result)
+
+      res.json({"message": "your search result is: " ,books: result})
     } catch (e) {
         res.status(500).json({message: e.message})
     }
