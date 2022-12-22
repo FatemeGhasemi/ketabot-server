@@ -20,7 +20,7 @@
     "express": "^4.15.4",
     "fs": "0.0.1-security",
     "hashmap": "^2.3.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "kavenegar": "^1.1.4",
     "mocha": "6.0.0-1",
     "mongoosastic": "^4.3.0",
